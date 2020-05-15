@@ -10,28 +10,34 @@ export class SBar implements ComponentInterface {
 
   @Prop() orientation: 'horizontal' | 'vertical' = 'horizontal';
   @Prop() value: number;
-  @Prop() firstSegmentMinValue: number;
-  @Prop() firstSegmentMaxValue: number;
-  @Prop() secondSegmentMaxValue: number;
-  @Prop() thirdSegmentMaxValue: number;
+  @Prop() minValue: number;
+  @Prop() maxValue: number;
+  @Prop() secondLevelMaxValue: number;
+  @Prop() thirdLevelMaxValue: number;
 
   render() {
-    let firstSegmentScale: d3.ScaleLinear<number, number>;
-    let secondSegmentScale: d3.ScaleLinear<number, number>;
-    let thirdSegmentScale: d3.ScaleLinear<number, number>;
-    if (this.firstSegmentMinValue !== undefined && this.thirdSegmentMaxValue !== undefined) {
-      firstSegmentScale = d3.scaleLinear()
-        .domain([this.firstSegmentMinValue, this.firstSegmentMaxValue])
-        .range([0, 100])
-        .clamp(true);
-      secondSegmentScale = d3.scaleLinear()
-        .domain([this.firstSegmentMaxValue, this.secondSegmentMaxValue])
-        .range([0, 100])
-        .clamp(true);
-      thirdSegmentScale = d3.scaleLinear()
-        .domain([this.secondSegmentMaxValue, this.thirdSegmentMaxValue])
-        .range([0, 100])
-        .clamp(true);
+    let firstLevelScale: d3.ScaleLinear<number, number>;
+    let secondLevelScale: d3.ScaleLinear<number, number>;
+    let thirdLevelScale: d3.ScaleLinear<number, number>;
+    if (this.minValue !== undefined) {
+      if (this.maxValue !== undefined) {
+        firstLevelScale = d3.scaleLinear()
+          .domain([this.minValue, this.maxValue])
+          .range([0, 100])
+          .clamp(true);
+      }
+      if (this.secondLevelMaxValue !== undefined) {
+        secondLevelScale = d3.scaleLinear()
+          .domain([this.maxValue, this.secondLevelMaxValue])
+          .range([0, 100])
+          .clamp(true);
+      }
+      if (this.thirdLevelMaxValue !== undefined) {
+        thirdLevelScale = d3.scaleLinear()
+          .domain([this.secondLevelMaxValue, this.thirdLevelMaxValue])
+          .range([0, 100])
+          .clamp(true);
+      }
     }
 
     return (
@@ -42,37 +48,41 @@ export class SBar implements ComponentInterface {
             this.orientation === 'horizontal' ?
               <g>
                 {
-                  firstSegmentScale &&
+                  firstLevelScale &&
                   <rect
                     id="first-segment"
                     x="0"
                     y="0"
-                    width={firstSegmentScale(this.value)}
+                    width={firstLevelScale(this.value)}
                     height="100"
                     fill="rgb(200,200,200)"></rect>
                 }
                 {
-                  secondSegmentScale &&
+                  secondLevelScale &&
                   <rect
                     id="second-segment"
                     x="0"
                     y="15"
-                    width={secondSegmentScale(this.value)}
+                    width={secondLevelScale(this.value)}
                     height="70"
                     fill="rgb(100,100,100)"></rect>
                 }
                 {
-                  thirdSegmentScale &&
+                  thirdLevelScale &&
                   <rect
                     id="third-segment"
                     x="0"
                     y="30"
-                    width={thirdSegmentScale(this.value)}
+                    width={thirdLevelScale(this.value)}
                     height="40"
                     fill="rgb(0,0,0)"></rect>
                 }
                 {
-                  this.value > this.thirdSegmentMaxValue &&
+                  (
+                    (this.value > this.thirdLevelMaxValue) ||
+                    (!thirdLevelScale && this.value > this.secondLevelMaxValue) ||
+                    (!thirdLevelScale && !secondLevelScale && this.value > this.maxValue)
+                  ) &&
                   <line
                     id="exceed-max-line"
                     x1="0"
@@ -86,37 +96,41 @@ export class SBar implements ComponentInterface {
               </g> :
               <g>
                 {
-                  firstSegmentScale &&
+                  firstLevelScale &&
                   <rect
                     id="first-segment"
                     x="0"
                     y="0"
                     width="100"
-                    height={firstSegmentScale(this.value)}
+                    height={firstLevelScale(this.value)}
                     fill="rgb(200,200,200)"></rect>
                 }
                 {
-                  secondSegmentScale &&
+                  secondLevelScale &&
                   <rect
                     id="second-segment"
                     x="15"
                     y="0"
                     width="70"
-                    height={secondSegmentScale(this.value)}
+                    height={secondLevelScale(this.value)}
                     fill="rgb(100,100,100)"></rect>
                 }
                 {
-                  thirdSegmentScale &&
+                  thirdLevelScale &&
                   <rect
                     id="third-segment"
                     x="30"
                     y="0"
                     width="40"
-                    height={thirdSegmentScale(this.value)}
+                    height={thirdLevelScale(this.value)}
                     fill="rgb(0,0,0)"></rect>
                 }
                 {
-                  this.value > this.thirdSegmentMaxValue &&
+                  (
+                    (this.value > this.thirdLevelMaxValue) ||
+                    (!thirdLevelScale && this.value > this.secondLevelMaxValue) ||
+                    (!thirdLevelScale && !secondLevelScale && this.value > this.maxValue)
+                  ) &&
                   <line
                     id="exceed-max-line"
                     x1="50"

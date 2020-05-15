@@ -7,11 +7,11 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface SBar {
-        "firstSegmentMaxValue": number;
-        "firstSegmentMinValue": number;
+        "maxValue": number;
+        "minValue": number;
         "orientation": "horizontal" | "vertical";
-        "secondSegmentMaxValue": number;
-        "thirdSegmentMaxValue": number;
+        "secondLevelMaxValue": number;
+        "thirdLevelMaxValue": number;
         "value": number;
     }
     interface SBox {
@@ -41,11 +41,11 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SBar {
-        "firstSegmentMaxValue"?: number;
-        "firstSegmentMinValue"?: number;
+        "maxValue"?: number;
+        "minValue"?: number;
         "orientation"?: "horizontal" | "vertical";
-        "secondSegmentMaxValue"?: number;
-        "thirdSegmentMaxValue"?: number;
+        "secondLevelMaxValue"?: number;
+        "thirdLevelMaxValue"?: number;
         "value"?: number;
     }
     interface SBox {
