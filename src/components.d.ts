@@ -19,6 +19,12 @@ export namespace Components {
         "value": number;
     }
     interface SBox {
+        "boxFill": string;
+        "boxStroke": string;
+        "connectionLineStroke": string;
+        "maxLineStroke": string;
+        "medianLineStroke": string;
+        "minLineStroke": string;
         "orientation": "horizontal" | "vertical";
         "scaleMaxValue": number;
         "scaleMinValue": number;
@@ -57,6 +63,12 @@ declare namespace LocalJSX {
         "value"?: number;
     }
     interface SBox {
+        "boxFill"?: string;
+        "boxStroke"?: string;
+        "connectionLineStroke"?: string;
+        "maxLineStroke"?: string;
+        "medianLineStroke"?: string;
+        "minLineStroke"?: string;
         "orientation"?: "horizontal" | "vertical";
         "scaleMaxValue"?: number;
         "scaleMinValue"?: number;
