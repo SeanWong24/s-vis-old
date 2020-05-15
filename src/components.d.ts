@@ -15,6 +15,7 @@ export namespace Components {
         "value": number;
     }
     interface SBox {
+        "orientation": "horizontal" | "vertical";
         "scaleMaxValue": number;
         "scaleMinValue": number;
         "values": number[] | string;
@@ -48,6 +49,7 @@ declare namespace LocalJSX {
         "value"?: number;
     }
     interface SBox {
+        "orientation"?: "horizontal" | "vertical";
         "scaleMaxValue"?: number;
         "scaleMinValue"?: number;
         "values"?: number[] | string;

@@ -8,6 +8,7 @@ import * as d3 from 'd3';
 })
 export class SBox implements ComponentInterface {
 
+  @Prop() orientation: 'horizontal' | 'vertical' = 'horizontal';
   @Prop() values: number[] | string;
   @Prop() scaleMinValue: number;
   @Prop() scaleMaxValue: number;
@@ -36,50 +37,7 @@ export class SBox implements ComponentInterface {
 
     return (
       <Host>
-        <svg viewBox="0 0 100 10">
-          <line
-            id="min-line"
-            x1={scale(minValue)}
-            y1="0"
-            x2={scale(minValue)}
-            y2="10"
-            stroke="black" />
-          <line
-            id="min-q1-line"
-            x1={scale(minValue)}
-            y1="5"
-            x2={scale(q1)}
-            y2="5"
-            stroke="black" />
-          <rect
-            id="box"
-            x={scale(q1)}
-            y="0"
-            width={scale(q3) - scale(q1)}
-            height="10"
-            stroke="black"
-            fill="azure" />
-          <line
-            id="median-line"
-            x1={scale(median)}
-            y1="0"
-            x2={scale(median)}
-            y2="10"
-            stroke="black" />
-          <line
-            id="q1-max-line"
-            x1={scale(q3)}
-            y1="5"
-            x2={scale(maxValue)}
-            y2="5"
-            stroke="black" />
-          <line
-            id="max-line"
-            x1={scale(maxValue)}
-            y1="0"
-            x2={scale(maxValue)}
-            y2="10"
-            stroke="black" />
+        <svg id="main-svg" viewBox={this.orientation === 'horizontal' ? '0 0 100 10' : '0 0 10 100'} preserveAspectRatio="none">
           <title>{
             'min: ' + minValue + '\n' +
             '25%: ' + q1 + '\n' +
@@ -87,6 +45,99 @@ export class SBox implements ComponentInterface {
             '75%: ' + q3 + '\n' +
             'max: ' + maxValue
           }</title>
+          {
+            this.orientation === 'horizontal' ?
+              <g>
+                <line
+                  id="min-line"
+                  x1={scale(minValue)}
+                  y1="0"
+                  x2={scale(minValue)}
+                  y2="10"
+                  stroke="black" />
+                <line
+                  id="min-q1-line"
+                  x1={scale(minValue)}
+                  y1="5"
+                  x2={scale(q1)}
+                  y2="5"
+                  stroke="black" />
+                <rect
+                  id="box"
+                  x={scale(q1)}
+                  y="0"
+                  width={scale(q3) - scale(q1)}
+                  height="10"
+                  stroke="black"
+                  fill="azure" />
+                <line
+                  id="median-line"
+                  x1={scale(median)}
+                  y1="0"
+                  x2={scale(median)}
+                  y2="10"
+                  stroke="black" />
+                <line
+                  id="q1-max-line"
+                  x1={scale(q3)}
+                  y1="5"
+                  x2={scale(maxValue)}
+                  y2="5"
+                  stroke="black" />
+                <line
+                  id="max-line"
+                  x1={scale(maxValue)}
+                  y1="0"
+                  x2={scale(maxValue)}
+                  y2="10"
+                  stroke="black" />
+              </g> :
+              <g>
+                <line
+                  id="min-line"
+                  x1="0"
+                  y1={scale(minValue)}
+                  x2="10"
+                  y2={scale(minValue)}
+                  stroke="black" />
+                <line
+                  id="min-q1-line"
+                  x1="5"
+                  y1={scale(minValue)}
+                  x2="5"
+                  y2={scale(q1)}
+                  stroke="black" />
+                <rect
+                  id="box"
+                  x="0"
+                  y={scale(q1)}
+                  width="10"
+                  height={scale(q3) - scale(q1)}
+                  stroke="black"
+                  fill="azure" />
+                <line
+                  id="median-line"
+                  x1="0"
+                  y1={scale(median)}
+                  x2="10"
+                  y2={scale(median)}
+                  stroke="black" />
+                <line
+                  id="q1-max-line"
+                  x1="5"
+                  y1={scale(q3)}
+                  x2="5"
+                  y2={scale(maxValue)}
+                  stroke="black" />
+                <line
+                  id="max-line"
+                  x1="0"
+                  y1={scale(maxValue)}
+                  x2="10"
+                  y2={scale(maxValue)}
+                  stroke="black" />
+              </g>
+          }
         </svg>
       </Host>
     );

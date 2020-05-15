@@ -13,20 +13,21 @@
 
 <body>
 
-  <div>
-    <script>
-      function switchOrientationOnClick(target) {
-        if (target.orientation === 'horizontal') {
-          target.orientation = 'vertical';
-          target.style.width = '20px';
-          target.style.height = '200px';
-        } else {
-          target.orientation = 'horizontal';
-          target.style.width = '200px';
-          target.style.height = '20px';
-        }
+  <script>
+    function switchOrientationOnClick(target) {
+      if (target.orientation === 'horizontal') {
+        target.orientation = 'vertical';
+        target.style.width = '20px';
+        target.style.height = '200px';
+      } else {
+        target.orientation = 'horizontal';
+        target.style.width = '200px';
+        target.style.height = '20px';
       }
-    </script>
+    }
+  </script>
+
+  <div>
     <h1>Bar Plots</h1>
     <s-bar onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" value="0"
       first-segment-min-value="0" first-segment-max-value="10" second-segment-max-value="50"
@@ -47,13 +48,15 @@
   <hr />
   <div>
     <h1>Box Plots</h1>
-    <s-box style="height: 20px; width: 200px; margin: 10px;" values="[1,2,3,4,5]" scale-min-value="0"
-      scale-max-value="10"></s-box>
-    <s-box style="height: 20px; width: 200px; margin: 10px;" values="[1,2,3,8,9]" scale-min-value="0"
-      scale-max-value="10"></s-box>
-    <s-box style="height: 20px; width: 200px; margin: 10px;" values="[1,2,3]" scale-min-value="0" scale-max-value="10">
+    <s-box onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;"
+      values="[1,2,3,4,5]" scale-min-value="0" scale-max-value="10"></s-box>
+    <s-box onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;"
+      values="[1,2,3,8,9]" scale-min-value="0" scale-max-value="10"></s-box>
+    <s-box onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" values="[1,2,3]"
+      scale-min-value="0" scale-max-value="10">
     </s-box>
-    <s-box style="height: 20px; width: 200px; margin: 10px;" values="[3,4,5]" scale-min-value="0" scale-max-value="10">
+    <s-box onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" values="[3,4,5]"
+      scale-min-value="0" scale-max-value="10">
     </s-box>
   </div>
   <hr />
