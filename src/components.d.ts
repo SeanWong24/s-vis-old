@@ -6,56 +6,42 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface SBar {
+        "firstSegmentMaxValue": number;
+        "firstSegmentMinValue": number;
+        "secondSegmentMaxValue": number;
+        "thirdSegmentMaxValue": number;
+        "value": number;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLSBarElement extends Components.SBar, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLSBarElement: {
+        prototype: HTMLSBarElement;
+        new (): HTMLSBarElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "s-bar": HTMLSBarElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface SBar {
+        "firstSegmentMaxValue"?: number;
+        "firstSegmentMinValue"?: number;
+        "secondSegmentMaxValue"?: number;
+        "thirdSegmentMaxValue"?: number;
+        "value"?: number;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "s-bar": SBar;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "s-bar": LocalJSX.SBar & JSXBase.HTMLAttributes<HTMLSBarElement>;
         }
     }
 }

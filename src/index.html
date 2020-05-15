@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
@@ -9,9 +10,24 @@
   <script nomodule src="/build/s-vis.js"></script>
 
 </head>
+
 <body>
 
-  <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+  <div>
+    <h1>Bar Plots</h1>
+    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="0" first-segment-min-value="0"
+      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
+    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="3" first-segment-min-value="0"
+      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
+    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="27" first-segment-min-value="0"
+      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
+    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="55" first-segment-min-value="0"
+      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
+    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="120" first-segment-min-value="0"
+      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
+  </div>
+  <hr />
 
 </body>
+
 </html>
