@@ -80,6 +80,7 @@ export class SBar implements ComponentInterface {
                     x2="100"
                     y2="50"
                     stroke="white"
+                    stroke-width="5"
                   ></line>
                 }
               </g> :
@@ -123,6 +124,7 @@ export class SBar implements ComponentInterface {
                     x2="50"
                     y2="100"
                     stroke="white"
+                    stroke-width="5"
                   ></line>
                 }
               </g>
