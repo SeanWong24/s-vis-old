@@ -14,6 +14,11 @@ export class SBar implements ComponentInterface {
   @Prop() maxValue: number;
   @Prop() secondLevelMaxValue: number;
   @Prop() thirdLevelMaxValue: number;
+  @Prop() fill: string = 'rgb(200,200,200)';
+  @Prop() secondLevelFill: string = 'rgb(100,100,100)';
+  @Prop() thirdLevelFill: string = 'rgb(0,0,0)';
+  @Prop() exceedMaxLineStroke: string = 'rgb(255,255,255)';
+
 
   render() {
     let firstLevelScale: d3.ScaleLinear<number, number>;
@@ -55,7 +60,7 @@ export class SBar implements ComponentInterface {
                     y="0"
                     width={firstLevelScale(this.value)}
                     height="100"
-                    fill="rgb(200,200,200)"></rect>
+                    fill={this.fill}></rect>
                 }
                 {
                   secondLevelScale &&
@@ -65,7 +70,7 @@ export class SBar implements ComponentInterface {
                     y="15"
                     width={secondLevelScale(this.value)}
                     height="70"
-                    fill="rgb(100,100,100)"></rect>
+                    fill={this.secondLevelFill}></rect>
                 }
                 {
                   thirdLevelScale &&
@@ -75,7 +80,7 @@ export class SBar implements ComponentInterface {
                     y="30"
                     width={thirdLevelScale(this.value)}
                     height="40"
-                    fill="rgb(0,0,0)"></rect>
+                    fill={this.thirdLevelFill}></rect>
                 }
                 {
                   (
@@ -89,7 +94,7 @@ export class SBar implements ComponentInterface {
                     y1="50"
                     x2="100"
                     y2="50"
-                    stroke="white"
+                    stroke={this.exceedMaxLineStroke}
                     stroke-width="5"
                   ></line>
                 }
@@ -103,7 +108,7 @@ export class SBar implements ComponentInterface {
                     y="0"
                     width="100"
                     height={firstLevelScale(this.value)}
-                    fill="rgb(200,200,200)"></rect>
+                    fill={this.fill}></rect>
                 }
                 {
                   secondLevelScale &&
@@ -113,7 +118,7 @@ export class SBar implements ComponentInterface {
                     y="0"
                     width="70"
                     height={secondLevelScale(this.value)}
-                    fill="rgb(100,100,100)"></rect>
+                    fill={this.secondLevelFill}></rect>
                 }
                 {
                   thirdLevelScale &&
@@ -123,7 +128,7 @@ export class SBar implements ComponentInterface {
                     y="0"
                     width="40"
                     height={thirdLevelScale(this.value)}
-                    fill="rgb(0,0,0)"></rect>
+                    fill={this.thirdLevelFill}></rect>
                 }
                 {
                   (
@@ -137,7 +142,7 @@ export class SBar implements ComponentInterface {
                     y1="0"
                     x2="50"
                     y2="100"
-                    stroke="white"
+                    stroke={this.exceedMaxLineStroke}
                     stroke-width="5"
                   ></line>
                 }

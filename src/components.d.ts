@@ -7,10 +7,14 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface SBar {
+        "exceedMaxLineStroke": string;
+        "fill": string;
         "maxValue": number;
         "minValue": number;
         "orientation": "horizontal" | "vertical";
+        "secondLevelFill": string;
         "secondLevelMaxValue": number;
+        "thirdLevelFill": string;
         "thirdLevelMaxValue": number;
         "value": number;
     }
@@ -41,10 +45,14 @@ declare global {
 }
 declare namespace LocalJSX {
     interface SBar {
+        "exceedMaxLineStroke"?: string;
+        "fill"?: string;
         "maxValue"?: number;
         "minValue"?: number;
         "orientation"?: "horizontal" | "vertical";
+        "secondLevelFill"?: string;
         "secondLevelMaxValue"?: number;
+        "thirdLevelFill"?: string;
         "thirdLevelMaxValue"?: number;
         "value"?: number;
     }
