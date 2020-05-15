@@ -14,17 +14,35 @@
 <body>
 
   <div>
+    <script>
+      function switchOrientationOnClick(target) {
+        if (target.orientation === 'horizontal') {
+          target.orientation = 'vertical';
+          target.style.width = '20px';
+          target.style.height = '200px';
+        } else {
+          target.orientation = 'horizontal';
+          target.style.width = '200px';
+          target.style.height = '20px';
+        }
+      }
+    </script>
     <h1>Bar Plots</h1>
-    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="0" first-segment-min-value="0"
-      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
-    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="3" first-segment-min-value="0"
-      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
-    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="27" first-segment-min-value="0"
-      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
-    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="55" first-segment-min-value="0"
-      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
-    <s-bar style="height: 20px; width: 200px; margin: 10px;" value="120" first-segment-min-value="0"
-      first-segment-max-value="10" second-segment-max-value="50" third-segment-max-value="100"></s-bar>
+    <s-bar onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" value="0"
+      first-segment-min-value="0" first-segment-max-value="10" second-segment-max-value="50"
+      third-segment-max-value="100"></s-bar>
+    <s-bar onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" value="3"
+      first-segment-min-value="0" first-segment-max-value="10" second-segment-max-value="50"
+      third-segment-max-value="100"></s-bar>
+    <s-bar onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" value="27"
+      first-segment-min-value="0" first-segment-max-value="10" second-segment-max-value="50"
+      third-segment-max-value="100"></s-bar>
+    <s-bar onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" value="55"
+      first-segment-min-value="0" first-segment-max-value="10" second-segment-max-value="50"
+      third-segment-max-value="100"></s-bar>
+    <s-bar onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" value="120"
+      first-segment-min-value="0" first-segment-max-value="10" second-segment-max-value="50"
+      third-segment-max-value="100"></s-bar>
   </div>
   <hr />
   <div>

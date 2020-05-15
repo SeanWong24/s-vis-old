@@ -9,6 +9,7 @@ export namespace Components {
     interface SBar {
         "firstSegmentMaxValue": number;
         "firstSegmentMinValue": number;
+        "orientation": "horizontal" | "vertical";
         "secondSegmentMaxValue": number;
         "thirdSegmentMaxValue": number;
         "value": number;
@@ -41,6 +42,7 @@ declare namespace LocalJSX {
     interface SBar {
         "firstSegmentMaxValue"?: number;
         "firstSegmentMinValue"?: number;
+        "orientation"?: "horizontal" | "vertical";
         "secondSegmentMaxValue"?: number;
         "thirdSegmentMaxValue"?: number;
         "value"?: number;

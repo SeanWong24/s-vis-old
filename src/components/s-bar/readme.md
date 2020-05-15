@@ -7,13 +7,14 @@
 
 ## Properties
 
-| Property                | Attribute                  | Description | Type     | Default     |
-| ----------------------- | -------------------------- | ----------- | -------- | ----------- |
-| `firstSegmentMaxValue`  | `first-segment-max-value`  |             | `number` | `undefined` |
-| `firstSegmentMinValue`  | `first-segment-min-value`  |             | `number` | `undefined` |
-| `secondSegmentMaxValue` | `second-segment-max-value` |             | `number` | `undefined` |
-| `thirdSegmentMaxValue`  | `third-segment-max-value`  |             | `number` | `undefined` |
-| `value`                 | `value`                    |             | `number` | `undefined` |
+| Property                | Attribute                  | Description | Type                         | Default        |
+| ----------------------- | -------------------------- | ----------- | ---------------------------- | -------------- |
+| `firstSegmentMaxValue`  | `first-segment-max-value`  |             | `number`                     | `undefined`    |
+| `firstSegmentMinValue`  | `first-segment-min-value`  |             | `number`                     | `undefined`    |
+| `orientation`           | `orientation`              |             | `"horizontal" \| "vertical"` | `'horizontal'` |
+| `secondSegmentMaxValue` | `second-segment-max-value` |             | `number`                     | `undefined`    |
+| `thirdSegmentMaxValue`  | `third-segment-max-value`  |             | `number`                     | `undefined`    |
+| `value`                 | `value`                    |             | `number`                     | `undefined`    |
 
 
 ----------------------------------------------
