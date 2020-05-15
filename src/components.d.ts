@@ -13,6 +13,11 @@ export namespace Components {
         "thirdSegmentMaxValue": number;
         "value": number;
     }
+    interface SBox {
+        "scaleMaxValue": number;
+        "scaleMinValue": number;
+        "values": number[] | string;
+    }
 }
 declare global {
     interface HTMLSBarElement extends Components.SBar, HTMLStencilElement {
@@ -21,8 +26,15 @@ declare global {
         prototype: HTMLSBarElement;
         new (): HTMLSBarElement;
     };
+    interface HTMLSBoxElement extends Components.SBox, HTMLStencilElement {
+    }
+    var HTMLSBoxElement: {
+        prototype: HTMLSBoxElement;
+        new (): HTMLSBoxElement;
+    };
     interface HTMLElementTagNameMap {
         "s-bar": HTMLSBarElement;
+        "s-box": HTMLSBoxElement;
     }
 }
 declare namespace LocalJSX {
@@ -33,8 +45,14 @@ declare namespace LocalJSX {
         "thirdSegmentMaxValue"?: number;
         "value"?: number;
     }
+    interface SBox {
+        "scaleMaxValue"?: number;
+        "scaleMinValue"?: number;
+        "values"?: number[] | string;
+    }
     interface IntrinsicElements {
         "s-bar": SBar;
+        "s-box": SBox;
     }
 }
 export { LocalJSX as JSX };
@@ -42,6 +60,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "s-bar": LocalJSX.SBar & JSXBase.HTMLAttributes<HTMLSBarElement>;
+            "s-box": LocalJSX.SBox & JSXBase.HTMLAttributes<HTMLSBoxElement>;
         }
     }
 }
