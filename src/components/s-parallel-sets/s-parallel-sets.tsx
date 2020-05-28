@@ -29,6 +29,7 @@ export class SParallelSets implements ComponentInterface {
   @Prop() minimumRatioToShowAxisText: number = 0;
   @Prop() ribbonOpacity: number = .5;
   @Prop() ribbonHighlightOpacity: number = .8;
+  @Prop() sideMargin: number = 2;
 
   @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
   @Event() axisSegmentClick: EventEmitter<ParallelSetsDataNode[]>;
@@ -57,7 +58,6 @@ export class SParallelSets implements ComponentInterface {
     this.fillSegmentPositions(dimensionNodeListMap, dimensionValuesMap);
 
     const { width, height } = this.hostElementBoundingClientRect || {};
-    const margin = 2;
     const colorScale = d3.scaleOrdinal(this.colorScheme);
 
     return (
@@ -65,8 +65,8 @@ export class SParallelSets implements ComponentInterface {
         {
           width && height &&
           <svg id="main-svg" width={width} height={height}>
-            {this.renderRibbons(dimensionNodeListMap, width, margin, height, colorScale)}
-            {this.renderAxes(dimensionNodeListMap, width, margin, height)}
+            {this.renderRibbons(dimensionNodeListMap, width, height, colorScale)}
+            {this.renderAxes(dimensionNodeListMap, width, height)}
           </svg>
         }
       </Host>
@@ -77,7 +77,6 @@ export class SParallelSets implements ComponentInterface {
   private renderAxes(
     dimensionNodeListMap: Map<string, ParallelSetsDataNode[]>,
     width: number,
-    margin: number,
     height: number
   ) {
     this.hostElement.style.setProperty("--axis-text-font-size", this.axisBoxWidth * .8 + 'px');
@@ -94,7 +93,7 @@ export class SParallelSets implements ComponentInterface {
         }
       }
       const segmentElementList = [...currentSegmentNodeListMap].map(([currentSegmentValue, currentSegmentNodeList]) => {
-        const x = this.obtainDimensionPosition(width, margin, i);
+        const x = this.obtainDimensionPosition(width, this.sideMargin, i);
         const currentSegmentPosition: [number, number] = [
           currentSegmentNodeList[0].adjustedSegmentPosition[0] || currentSegmentNodeList[0].segmentPosition[0],
           currentSegmentNodeList[currentSegmentNodeList.length - 1].adjustedSegmentPosition[1] || currentSegmentNodeList[currentSegmentNodeList.length - 1].segmentPosition[1]
@@ -145,7 +144,6 @@ export class SParallelSets implements ComponentInterface {
   private renderRibbons(
     dimensionNodeListMap: Map<string, ParallelSetsDataNode[]>,
     width: number,
-    margin: number,
     height: number,
     colorScale: d3.ScaleOrdinal<string, string>
   ) {
@@ -154,8 +152,8 @@ export class SParallelSets implements ComponentInterface {
       const nodeList = dimensionNodeListMap.get(dimensionName);
       const nextDimensionName = this.dimensionNameList[i + 1];
       const ribbonList = nodeList.map(node => {
-        const x = this.obtainDimensionPosition(width, margin, i);
-        const childX = this.obtainDimensionPosition(width, margin, i + 1);
+        const x = this.obtainDimensionPosition(width, this.sideMargin, i);
+        const childX = this.obtainDimensionPosition(width, this.sideMargin, i + 1);
         const childNodeList = (dimensionNodeListMap.get(nextDimensionName) || [])
           // TODO try to use index calculation for the filter
           .filter(d => d.valueHistory.slice(0, node.valueHistory.length).toString() === node.valueHistory.toString());
