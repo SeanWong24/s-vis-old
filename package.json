@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Stencil Component Starter",
   "main": "dist/index.js",
-  "module": "dist/custom-elements-bundle/index.mjs",
+  "module": "dist/index.mjs",
   "es2015": "dist/esm/index.mjs",
   "es2017": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
@@ -11,7 +11,8 @@
   "collection:main": "dist/collection/index.js",
   "unpkg": "dist/s-vis/s-vis.js",
   "files": [
-    "/"
+    "dist/",
+    "loader/"
   ],
   "scripts": {
     "build": "stencil build --docs",
