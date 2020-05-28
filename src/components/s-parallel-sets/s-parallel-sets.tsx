@@ -22,7 +22,8 @@ export class SParallelSets implements ComponentInterface {
   @Prop() mergedSegmentMaxRatio: number = 1;
   @Prop() maxSegmentMarginRatioAllowed: number = .1;
   @Prop() colorScheme: string[] = [...d3.schemeAccent];
-  @Prop() axisWidth: number = 15;
+  @Prop() axisStrokeWidth: number = 2;
+  @Prop() axisBoxWidth: number = 15;
   @Prop() axisBoxFill: string = 'rgb(100,100,100)';
   @Prop() axisTextColor: string = 'rgb(0,0,0)';
   @Prop() minimumRatioToShowAxisText: number = 0;
@@ -79,7 +80,7 @@ export class SParallelSets implements ComponentInterface {
     margin: number,
     height: number
   ) {
-    this.hostElement.style.setProperty("--axis-text-font-size", this.axisWidth + 'px');
+    this.hostElement.style.setProperty("--axis-text-font-size", this.axisBoxWidth + 'px');
     return this.dimensionNameList.map((dimensionName, i) => {
       const nodeList = dimensionNodeListMap.get(dimensionName);
       const currentSegmentNodeListMap = new Map<string | number, ParallelSetsDataNode[]>();
@@ -104,12 +105,12 @@ export class SParallelSets implements ComponentInterface {
           x2={x}
           y2={currentSegmentPosition[1] * height}
           stroke="black"
-          stroke-width={margin}
+          stroke-width={this.axisStrokeWidth}
         ></line>;
         const box = <rect
           x={x}
           y={currentSegmentPosition[0] * height}
-          width={this.axisWidth}
+          width={this.axisBoxWidth}
           height={(currentSegmentPosition[1] - currentSegmentPosition[0]) * height}
           fill={this.axisBoxFill}
           opacity={0}
@@ -370,7 +371,7 @@ export class SParallelSets implements ComponentInterface {
   }
 
   private obtainDimensionPosition(width: number, margin: number, index: number) {
-    return (width - margin * 2 - this.axisWidth) / (this.dimensionNameList.length - 1) * index + margin;
+    return (width - margin * 2 - this.axisBoxWidth) / (this.dimensionNameList.length - 1) * index + margin;
   }
 
 }

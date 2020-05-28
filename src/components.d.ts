@@ -33,8 +33,9 @@ export namespace Components {
     }
     interface SParallelSets {
         "axisBoxFill": string;
+        "axisBoxWidth": number;
+        "axisStrokeWidth": number;
         "axisTextColor": string;
-        "axisWidth": number;
         "colorScheme": string[];
         "data": ParallelSetsDataRecord[];
         "dimensions": string[];
@@ -99,8 +100,9 @@ declare namespace LocalJSX {
     }
     interface SParallelSets {
         "axisBoxFill"?: string;
+        "axisBoxWidth"?: number;
+        "axisStrokeWidth"?: number;
         "axisTextColor"?: string;
-        "axisWidth"?: number;
         "colorScheme"?: string[];
         "data"?: ParallelSetsDataRecord[];
         "dimensions"?: string[];

@@ -10,8 +10,9 @@
 | Property                       | Attribute                          | Description | Type                       | Default                |
 | ------------------------------ | ---------------------------------- | ----------- | -------------------------- | ---------------------- |
 | `axisBoxFill`                  | `axis-box-fill`                    |             | `string`                   | `'rgb(100,100,100)'`   |
+| `axisBoxWidth`                 | `axis-box-width`                   |             | `number`                   | `15`                   |
+| `axisStrokeWidth`              | `axis-stroke-width`                |             | `number`                   | `2`                    |
 | `axisTextColor`                | `axis-text-color`                  |             | `string`                   | `'rgb(0,0,0)'`         |
-| `axisWidth`                    | `axis-width`                       |             | `number`                   | `15`                   |
 | `colorScheme`                  | --                                 |             | `string[]`                 | `[...d3.schemeAccent]` |
 | `data`                         | --                                 |             | `ParallelSetsDataRecord[]` | `[]`                   |
 | `dimensions`                   | --                                 |             | `string[]`                 | `undefined`            |
