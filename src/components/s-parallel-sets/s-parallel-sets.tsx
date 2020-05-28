@@ -80,7 +80,7 @@ export class SParallelSets implements ComponentInterface {
     margin: number,
     height: number
   ) {
-    this.hostElement.style.setProperty("--axis-text-font-size", this.axisBoxWidth + 'px');
+    this.hostElement.style.setProperty("--axis-text-font-size", this.axisBoxWidth * .8 + 'px');
     return this.dimensionNameList.map((dimensionName, i) => {
       const nodeList = dimensionNodeListMap.get(dimensionName);
       const currentSegmentNodeListMap = new Map<string | number, ParallelSetsDataNode[]>();
@@ -125,9 +125,10 @@ export class SParallelSets implements ComponentInterface {
         </rect>;
         const text = (currentSegmentPosition[1] - currentSegmentPosition[0] >= this.minimumRatioToShowAxisText) ?
           <text
-            x={x}
+            x={x + this.axisBoxWidth / 2}
             y={currentSegmentPosition[0] * height}
-            transform={`rotate(90,${x},${currentSegmentPosition[0] * height})`}
+            text-anchor="start"
+            writing-mode="tb"
             color={this.axisTextColor}
           >{currentSegmentValue}</text> :
           undefined;
