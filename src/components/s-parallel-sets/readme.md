@@ -11,8 +11,11 @@
 | ------------------------------ | ---------------------------------- | ----------- | -------------------------- | ---------------------- |
 | `axisBoxFill`                  | `axis-box-fill`                    |             | `string`                   | `'rgb(100,100,100)'`   |
 | `axisBoxWidth`                 | `axis-box-width`                   |             | `number`                   | `15`                   |
+| `axisHeaderTextColor`          | `axis-header-text-color`           |             | `string`                   | `'rgb(0,0,0)'`         |
+| `axisHeaderTextSize`           | `axis-header-text-size`            |             | `number`                   | `16`                   |
+| `axisHeaderTextWeight`         | `axis-header-text-weight`          |             | `string`                   | `'bold'`               |
+| `axisSegmentTextColor`         | `axis-segment-text-color`          |             | `string`                   | `'rgb(0,0,0)'`         |
 | `axisStrokeWidth`              | `axis-stroke-width`                |             | `number`                   | `2`                    |
-| `axisTextColor`                | `axis-text-color`                  |             | `string`                   | `'rgb(0,0,0)'`         |
 | `colorScheme`                  | --                                 |             | `string[]`                 | `[...d3.schemeAccent]` |
 | `data`                         | --                                 |             | `ParallelSetsDataRecord[]` | `[]`                   |
 | `dimensions`                   | --                                 |             | `string[]`                 | `undefined`            |

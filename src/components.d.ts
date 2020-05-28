@@ -34,8 +34,11 @@ export namespace Components {
     interface SParallelSets {
         "axisBoxFill": string;
         "axisBoxWidth": number;
+        "axisHeaderTextColor": string;
+        "axisHeaderTextSize": number;
+        "axisHeaderTextWeight": string;
+        "axisSegmentTextColor": string;
         "axisStrokeWidth": number;
-        "axisTextColor": string;
         "colorScheme": string[];
         "data": ParallelSetsDataRecord[];
         "dimensions": string[];
@@ -102,8 +105,11 @@ declare namespace LocalJSX {
     interface SParallelSets {
         "axisBoxFill"?: string;
         "axisBoxWidth"?: number;
+        "axisHeaderTextColor"?: string;
+        "axisHeaderTextSize"?: number;
+        "axisHeaderTextWeight"?: string;
+        "axisSegmentTextColor"?: string;
         "axisStrokeWidth"?: number;
-        "axisTextColor"?: string;
         "colorScheme"?: string[];
         "data"?: ParallelSetsDataRecord[];
         "dimensions"?: string[];

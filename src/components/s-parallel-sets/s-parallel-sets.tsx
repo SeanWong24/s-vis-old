@@ -25,7 +25,10 @@ export class SParallelSets implements ComponentInterface {
   @Prop() axisStrokeWidth: number = 2;
   @Prop() axisBoxWidth: number = 15;
   @Prop() axisBoxFill: string = 'rgb(100,100,100)';
-  @Prop() axisTextColor: string = 'rgb(0,0,0)';
+  @Prop() axisHeaderTextColor: string = 'rgb(0,0,0)';
+  @Prop() axisHeaderTextSize: number = 16;
+  @Prop() axisHeaderTextWeight: string = 'bold';
+  @Prop() axisSegmentTextColor: string = 'rgb(0,0,0)';
   @Prop() minimumRatioToShowAxisText: number = 0;
   @Prop() ribbonOpacity: number = .5;
   @Prop() ribbonHighlightOpacity: number = .8;
@@ -64,10 +67,39 @@ export class SParallelSets implements ComponentInterface {
       <Host>
         {
           width && height &&
-          <svg id="main-svg" width={width} height={height}>
-            {this.renderRibbons(dimensionNodeListMap, width, height, colorScale)}
-            {this.renderAxes(dimensionNodeListMap, width, height)}
-          </svg>
+          <div id="main-container">
+            <div id="axis-headers-container" style={{ height: this.axisHeaderTextSize + 'px' }}>
+              {this.dimensionNameList.map((dimensionName, i) => (
+                <text
+                  class="axis-header-text"
+                  style={{
+                    position: 'absolute',
+                    color: this.axisHeaderTextColor,
+                    fontSize: this.axisHeaderTextSize + 'px',
+                    fontWeight: this.axisHeaderTextWeight,
+                    left: this.obtainDimensionPosition(width, this.sideMargin, i) + 'px'
+                  }}
+                >{dimensionName}</text>
+              ))}
+            </div>
+            <svg id="main-svg" width={width} height={height - this.axisHeaderTextSize}>
+              {
+                this.renderRibbons(
+                  dimensionNodeListMap,
+                  width,
+                  height - this.axisHeaderTextSize,
+                  colorScale
+                )
+              }
+              {
+                this.renderAxes(
+                  dimensionNodeListMap,
+                  width,
+                  height - this.axisHeaderTextSize
+                )
+              }
+            </svg>
+          </div>
         }
       </Host>
     );
@@ -128,7 +160,7 @@ export class SParallelSets implements ComponentInterface {
             y={currentSegmentPosition[0] * height}
             text-anchor="start"
             writing-mode="tb"
-            color={this.axisTextColor}
+            color={this.axisSegmentTextColor}
           >{currentSegmentValue}</text> :
           undefined;
         return { line, box, text };

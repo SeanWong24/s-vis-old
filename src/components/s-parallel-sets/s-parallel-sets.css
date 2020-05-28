@@ -7,6 +7,15 @@
   --ribbon-highlight-opacity: .8;
 }
 
+#main-container {
+  width: 100%;
+  height: 100%;
+}
+
+.axis-header-text {
+  cursor: default;
+}
+
 .axis-box {
   cursor: pointer;
 }
