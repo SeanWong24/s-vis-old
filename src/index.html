@@ -9,6 +9,8 @@
   <script type="module" src="/build/s-vis.esm.js"></script>
   <script nomodule src="/build/s-vis.js"></script>
 
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
 </head>
 
 <body>
@@ -59,6 +61,18 @@
     <s-box onclick="switchOrientationOnClick(this)" style="height: 20px; width: 200px; margin: 10px;" values="[3,4,5]"
       scale-min-value="0" scale-max-value="10">
     </s-box>
+  </div>
+  <hr />
+  <div>
+    <h1>Parallel Sets</h1>
+    <s-parallel-sets max-segment-limit="2" merged-segment-max-ratio=".1" max-segment-margin-ratio-allowed=".15"
+      minimum-ratio-to-show-axis-text=".1" style="width: 600px; height: 300px;"></s-parallel-sets>
+    <script>
+      d3.json('./assets/parallel_sets/data.json')
+        .then(data => document.querySelector('s-parallel-sets').data = data);
+      d3.json('./assets/parallel_sets/dimensions.json')
+        .then(dimensions => document.querySelector('s-parallel-sets').dimensions = dimensions);
+    </script>
   </div>
   <hr />
 

@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ParallelSetsDataRecord, } from "./components/s-parallel-sets/utils";
 export namespace Components {
     interface SBar {
         "exceedMaxLineStroke": string;
@@ -30,6 +31,19 @@ export namespace Components {
         "scaleMinValue": number;
         "values": number[] | string;
     }
+    interface SParallelSets {
+        "axisBoxFill": string;
+        "axisTextColor": string;
+        "axisWidth": number;
+        "colorScheme": string[];
+        "data": ParallelSetsDataRecord[];
+        "dimensions": string[];
+        "maxSegmentLimit": number;
+        "maxSegmentMarginRatioAllowed": number;
+        "mergedSegmentMaxRatio": number;
+        "mergedSegmentName": string;
+        "minimumRatioToShowAxisText": number;
+    }
 }
 declare global {
     interface HTMLSBarElement extends Components.SBar, HTMLStencilElement {
@@ -44,9 +58,16 @@ declare global {
         prototype: HTMLSBoxElement;
         new (): HTMLSBoxElement;
     };
+    interface HTMLSParallelSetsElement extends Components.SParallelSets, HTMLStencilElement {
+    }
+    var HTMLSParallelSetsElement: {
+        prototype: HTMLSParallelSetsElement;
+        new (): HTMLSParallelSetsElement;
+    };
     interface HTMLElementTagNameMap {
         "s-bar": HTMLSBarElement;
         "s-box": HTMLSBoxElement;
+        "s-parallel-sets": HTMLSParallelSetsElement;
     }
 }
 declare namespace LocalJSX {
@@ -74,9 +95,23 @@ declare namespace LocalJSX {
         "scaleMinValue"?: number;
         "values"?: number[] | string;
     }
+    interface SParallelSets {
+        "axisBoxFill"?: string;
+        "axisTextColor"?: string;
+        "axisWidth"?: number;
+        "colorScheme"?: string[];
+        "data"?: ParallelSetsDataRecord[];
+        "dimensions"?: string[];
+        "maxSegmentLimit"?: number;
+        "maxSegmentMarginRatioAllowed"?: number;
+        "mergedSegmentMaxRatio"?: number;
+        "mergedSegmentName"?: string;
+        "minimumRatioToShowAxisText"?: number;
+    }
     interface IntrinsicElements {
         "s-bar": SBar;
         "s-box": SBox;
+        "s-parallel-sets": SParallelSets;
     }
 }
 export { LocalJSX as JSX };
@@ -85,6 +120,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "s-bar": LocalJSX.SBar & JSXBase.HTMLAttributes<HTMLSBarElement>;
             "s-box": LocalJSX.SBox & JSXBase.HTMLAttributes<HTMLSBoxElement>;
+            "s-parallel-sets": LocalJSX.SParallelSets & JSXBase.HTMLAttributes<HTMLSParallelSetsElement>;
         }
     }
 }
