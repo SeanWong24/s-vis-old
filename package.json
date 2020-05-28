@@ -12,7 +12,8 @@
   "unpkg": "dist/s-vis/s-vis.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "/"
   ],
   "scripts": {
     "build": "stencil build --docs",
