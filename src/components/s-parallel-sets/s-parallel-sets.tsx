@@ -26,6 +26,8 @@ export class SParallelSets implements ComponentInterface {
   @Prop() axisBoxFill: string = 'rgb(100,100,100)';
   @Prop() axisTextColor: string = 'rgb(0,0,0)';
   @Prop() minimumRatioToShowAxisText: number = 0;
+  @Prop() ribbonOpacity: number = .5;
+  @Prop() ribbonHighlightOpacity: number = .8;
 
   connectedCallback() {
     const resizeObserver = new ResizeObserver(entryList => {
@@ -141,6 +143,7 @@ export class SParallelSets implements ComponentInterface {
     height: number,
     colorScale: d3.ScaleOrdinal<string, string>
   ) {
+    this.hostElement.style.setProperty('--ribbon-highlight-opacity', this.ribbonHighlightOpacity.toString());
     return this.dimensionNameList.map((dimensionName, i) => {
       const nodeList = dimensionNodeListMap.get(dimensionName);
       const nextDimensionName = this.dimensionNameList[i + 1];
@@ -156,9 +159,27 @@ export class SParallelSets implements ComponentInterface {
             (node.valueHistory[i] === this.mergedSegmentName ? (1 - node.mergedSegmentAdjustmentRatio) : 1) /
             node.adjustmentRatio;
           const path = <path
+            ref={el => d3.select(el).datum(childNode)}
             d={`M${x},${(node.adjustedSegmentPosition[0] + totalPreviousCountRatio) * height} V${(node.adjustedSegmentPosition[0] + (totalPreviousCountRatio += childCountRatio)) * height} L${childX},${(childNode.adjustedSegmentPosition[1] || childNode.segmentPosition[1]) * height} V${(childNode.adjustedSegmentPosition[0] || childNode.segmentPosition[0]) * height} Z`}
             fill={colorScale(node.valueHistory[0].toString())}
-            opacity={.5}
+            opacity={this.ribbonOpacity}
+            onMouseEnter={() => {
+              d3.select(this.hostElement.shadowRoot)
+                .selectAll('g.ribbons path')
+                .classed('ribbon-highlight', (d: ParallelSetsDataNode) => {
+                  const minValueHistoryLenght = d3.min([d.valueHistory.length, childNode.valueHistory.length]);
+                  if (d.valueHistory.slice(0, minValueHistoryLenght).toString() === childNode.valueHistory.slice(0, minValueHistoryLenght).toString()) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                })
+            }}
+            onMouseLeave={() => {
+              d3.select(this.hostElement.shadowRoot)
+                .selectAll('.ribbons path')
+                .classed('ribbon-highlight', false)
+            }}
           >
             <title>{
               'Dimension: ' + dimensionName + ' -> ' + nextDimensionName + '\n' +

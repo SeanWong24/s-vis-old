@@ -4,6 +4,7 @@
   height: 100%;
   
   --axis-text-font-size: 1em;
+  --ribbon-highlight-opacity: .8;
 }
 
 .axis-box {
@@ -17,4 +18,8 @@
 .axis-text {
   font-size: var(--axis-text-font-size);
   pointer-events: none;
+}
+
+.ribbon-highlight {
+  opacity: var(--ribbon-highlight-opacity);
 }

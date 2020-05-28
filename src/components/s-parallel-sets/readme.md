@@ -20,6 +20,8 @@
 | `mergedSegmentMaxRatio`        | `merged-segment-max-ratio`         |             | `number`                   | `1`                    |
 | `mergedSegmentName`            | `merged-segment-name`              |             | `string`                   | `'*Other*'`            |
 | `minimumRatioToShowAxisText`   | `minimum-ratio-to-show-axis-text`  |             | `number`                   | `0`                    |
+| `ribbonHighlightOpacity`       | `ribbon-highlight-opacity`         |             | `number`                   | `.8`                   |
+| `ribbonOpacity`                | `ribbon-opacity`                   |             | `number`                   | `.5`                   |
 
 
 ----------------------------------------------
