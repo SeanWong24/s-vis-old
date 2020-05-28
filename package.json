@@ -28,7 +28,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "d3": "^5.16.0",
-    "stencil": "0.0.5"
+    "d3": "^5.16.0"
   }
 }
