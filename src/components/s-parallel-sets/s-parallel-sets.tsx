@@ -14,6 +14,8 @@ export class SParallelSets implements ComponentInterface {
   @Element() hostElement: HTMLElement;
 
   @State() hostElementBoundingClientRect: DOMRect;
+  @State() contextMenu: any;
+  @State() dimensionValuesMap: Map<string, (string | number)[]>;
 
   @Prop() data: ParallelSetsDataRecord[] = [];
   @Prop() dimensions: string[];
@@ -46,13 +48,15 @@ export class SParallelSets implements ComponentInterface {
       }
     });
     resizeObserver.observe(this.hostElement);
+
+    window.addEventListener('click', () => this.contextMenu = undefined);
   }
 
   render() {
     this.dimensionNameList = (this.dimensions?.length > 0) ?
       this.dimensions : Object.keys((this.data || [{}])[0]);
 
-    const dimensionValuesMap = this.generateDimensionValuesMap();
+    const dimensionValuesMap = this.dimensionValuesMap || this.generateDimensionValuesMap();
     const dimensionNodeListMap = this.generateDimensionNodeListMap(dimensionValuesMap);
     this.fillDataRecordListForDimensionNodeListMap(
       dimensionValuesMap,
@@ -68,6 +72,7 @@ export class SParallelSets implements ComponentInterface {
         {
           width && height &&
           <div id="main-container">
+            {this.contextMenu}
             <div id="axis-headers-container" style={{ height: this.axisHeaderTextSize + 'px' }}>
               {this.dimensionNameList.map((dimensionName, i) => (
                 <text
@@ -93,6 +98,7 @@ export class SParallelSets implements ComponentInterface {
               }
               {
                 this.renderAxes(
+                  dimensionValuesMap,
                   dimensionNodeListMap,
                   width,
                   height - this.axisHeaderTextSize
@@ -107,6 +113,7 @@ export class SParallelSets implements ComponentInterface {
 
 
   private renderAxes(
+    dimensionValuesMap: Map<string, (string | number)[]>,
     dimensionNodeListMap: Map<string, ParallelSetsDataNode[]>,
     width: number,
     height: number
@@ -146,6 +153,46 @@ export class SParallelSets implements ComponentInterface {
           fill={this.axisBoxFill}
           opacity={0}
           onClick={() => this.axisSegmentClick.emit(currentSegmentNodeList)}
+          onContextMenu={event => {
+            event.preventDefault();
+            this.contextMenu = <div
+              id="context-menu-container"
+              style={{
+                left: (event.x < (window.innerWidth / 2) ? event.x + 'px' : undefined),
+                top: (event.y < (window.innerHeight / 2) ? event.y + 'px' : undefined),
+                right: (event.x > (window.innerWidth / 2) ? (window.innerWidth - event.x) + 'px' : undefined),
+                bottom: (event.y > (window.innerHeight / 2) ? (window.innerHeight - event.y) + 'px' : undefined)
+              }}
+            >
+              <ul>
+                {['Move Up', 'Move Down'].map(item => (
+                  <li
+                    onClick={() => {
+                      const swapItems = function (list: any[], index1: number, index2: number) {
+                        if (index1 >= 0 && index1 < list.length && index2 >= 0 && index2 < list.length) {
+                          list[index1] = list.splice(index2, 1, list[index1])[0];
+                        }
+                      };
+                      const valueList = dimensionValuesMap.get(dimensionName);
+                      const currentValueIndex = valueList.findIndex(value => value === currentSegmentValue);
+                      switch (item) {
+                        case 'Move Up':
+                          swapItems(valueList, currentValueIndex, currentValueIndex - 1);
+                          break;
+                        case 'Move Down':
+                          swapItems(valueList, currentValueIndex, currentValueIndex + 1);
+                          break;
+                      }
+                      this.dimensionValuesMap = new Map(dimensionValuesMap);
+                    }}
+                  >
+                    <text>{item}</text>
+                    <hr />
+                  </li>
+                ))}
+              </ul>
+            </div>;
+          }}
         >
           <title>{
             'Dimension: ' + dimensionName + '\n' +

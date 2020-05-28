@@ -12,6 +12,32 @@
   height: 100%;
 }
 
+#context-menu-container {
+  display: block;
+  position: fixed;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: lightgrey;
+  opacity: .8;
+  min-width: 100px;
+}
+
+#context-menu-container > ul {
+  margin: 0;
+  padding: 0;
+}
+
+#context-menu-container > ul > li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+#context-menu-container > ul > li:hover {
+  background-color: grey;
+}
+
 .axis-header-text {
   cursor: default;
 }
