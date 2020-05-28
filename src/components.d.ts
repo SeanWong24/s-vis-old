@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ParallelSetsDataRecord, } from "./components/s-parallel-sets/utils";
+import { ParallelSetsDataNode, ParallelSetsDataRecord, } from "./components/s-parallel-sets/utils";
 export namespace Components {
     interface SBar {
         "exceedMaxLineStroke": string;
@@ -43,6 +43,8 @@ export namespace Components {
         "mergedSegmentMaxRatio": number;
         "mergedSegmentName": string;
         "minimumRatioToShowAxisText": number;
+        "ribbonHighlightOpacity": number;
+        "ribbonOpacity": number;
     }
 }
 declare global {
@@ -107,6 +109,10 @@ declare namespace LocalJSX {
         "mergedSegmentMaxRatio"?: number;
         "mergedSegmentName"?: string;
         "minimumRatioToShowAxisText"?: number;
+        "onAxisSegmentClick"?: (event: CustomEvent<ParallelSetsDataNode[]>) => void;
+        "onRibbonClick"?: (event: CustomEvent<ParallelSetsDataNode>) => void;
+        "ribbonHighlightOpacity"?: number;
+        "ribbonOpacity"?: number;
     }
     interface IntrinsicElements {
         "s-bar": SBar;

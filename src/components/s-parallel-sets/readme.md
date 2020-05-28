@@ -24,6 +24,14 @@
 | `ribbonOpacity`                | `ribbon-opacity`                   |             | `number`                   | `.5`                   |
 
 
+## Events
+
+| Event              | Description | Type                                  |
+| ------------------ | ----------- | ------------------------------------- |
+| `axisSegmentClick` |             | `CustomEvent<ParallelSetsDataNode[]>` |
+| `ribbonClick`      |             | `CustomEvent<ParallelSetsDataNode>`   |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

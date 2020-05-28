@@ -68,10 +68,13 @@
     <s-parallel-sets max-segment-limit="2" merged-segment-max-ratio=".1" max-segment-margin-ratio-allowed=".15"
       minimum-ratio-to-show-axis-text=".1" style="width: 600px; height: 300px;"></s-parallel-sets>
     <script>
+      const parsetsElement = document.querySelector('s-parallel-sets');
       d3.json('./assets/parallel_sets/data.json')
-        .then(data => document.querySelector('s-parallel-sets').data = data);
+        .then(data => parsetsElement.data = data);
       d3.json('./assets/parallel_sets/dimensions.json')
-        .then(dimensions => document.querySelector('s-parallel-sets').dimensions = dimensions);
+        .then(dimensions => parsetsElement.dimensions = dimensions);
+      parsetsElement.addEventListener('ribbonClick', ({ detail }) => console.log(detail));
+      parsetsElement.addEventListener('axisSegmentClick', ({ detail }) => console.log(detail));
     </script>
   </div>
   <hr />

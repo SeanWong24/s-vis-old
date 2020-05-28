@@ -1,4 +1,4 @@
-import { Component, ComponentInterface, Host, h, Prop, Element, State } from '@stencil/core';
+import { Component, ComponentInterface, Host, h, Prop, Element, State, Event, EventEmitter } from '@stencil/core';
 import { ParallelSetsDataRecord, compareStrings, ParallelSetsDataNode } from './utils';
 import * as d3 from 'd3';
 
@@ -28,6 +28,9 @@ export class SParallelSets implements ComponentInterface {
   @Prop() minimumRatioToShowAxisText: number = 0;
   @Prop() ribbonOpacity: number = .5;
   @Prop() ribbonHighlightOpacity: number = .8;
+
+  @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
+  @Event() axisSegmentClick: EventEmitter<ParallelSetsDataNode[]>;
 
   connectedCallback() {
     const resizeObserver = new ResizeObserver(entryList => {
@@ -110,6 +113,7 @@ export class SParallelSets implements ComponentInterface {
           height={(currentSegmentPosition[1] - currentSegmentPosition[0]) * height}
           fill={this.axisBoxFill}
           opacity={0}
+          onClick={() => this.axisSegmentClick.emit(currentSegmentNodeList)}
         >
           <title>{
             'Dimension: ' + dimensionName + '\n' +
@@ -180,6 +184,7 @@ export class SParallelSets implements ComponentInterface {
                 .selectAll('.ribbons path')
                 .classed('ribbon-highlight', false)
             }}
+            onClick={() => this.ribbonClick.emit(childNode)}
           >
             <title>{
               'Dimension: ' + dimensionName + ' -> ' + nextDimensionName + '\n' +
