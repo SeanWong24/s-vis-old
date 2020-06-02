@@ -5,14 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ParallelSetsDataNode, ParallelSetsDataRecord, } from "./components/s-parallel-sets/utils";
+import { ParallelSetsDataNode, ParallelSetsDataRecord } from "./components/s-parallel-sets/utils";
 export namespace Components {
     interface SBar {
         "exceedMaxLineStroke": string;
         "fill": string;
         "maxValue": number;
         "minValue": number;
-        "orientation": "horizontal" | "vertical";
+        "orientation": 'horizontal' | 'vertical';
         "secondLevelFill": string;
         "secondLevelMaxValue": number;
         "thirdLevelFill": string;
@@ -26,7 +26,7 @@ export namespace Components {
         "maxLineStroke": string;
         "medianLineStroke": string;
         "minLineStroke": string;
-        "orientation": "horizontal" | "vertical";
+        "orientation": 'horizontal' | 'vertical';
         "scaleMaxValue": number;
         "scaleMinValue": number;
         "values": number[] | string;
@@ -83,7 +83,7 @@ declare namespace LocalJSX {
         "fill"?: string;
         "maxValue"?: number;
         "minValue"?: number;
-        "orientation"?: "horizontal" | "vertical";
+        "orientation"?: 'horizontal' | 'vertical';
         "secondLevelFill"?: string;
         "secondLevelMaxValue"?: number;
         "thirdLevelFill"?: string;
@@ -97,7 +97,7 @@ declare namespace LocalJSX {
         "maxLineStroke"?: string;
         "medianLineStroke"?: string;
         "minLineStroke"?: string;
-        "orientation"?: "horizontal" | "vertical";
+        "orientation"?: 'horizontal' | 'vertical';
         "scaleMaxValue"?: number;
         "scaleMinValue"?: number;
         "values"?: number[] | string;
