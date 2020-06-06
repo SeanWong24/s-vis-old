@@ -19,7 +19,7 @@ export class SParallelSets implements ComponentInterface {
 
   @Prop() data: ParallelSetsDataRecord[] = [];
   @Prop() dimensions: string[];
-  @Prop() maxSegmentLimit: number = 10;
+  @Prop() maxSegmentLimit: number | number[] = 10;
   @Prop() mergedSegmentName: string = '*Other*';
   @Prop() mergedSegmentMaxRatio: number = 1;
   @Prop() maxSegmentMarginRatioAllowed: number = .1;
@@ -438,9 +438,11 @@ export class SParallelSets implements ComponentInterface {
         });
       return [dimensionName, currentDimensionValueList] as [string, (string | number)[]];
     });
-    for (const dimensionValuesMapEntry of dimensionValuesMapEntryList) {
-      if (dimensionValuesMapEntry[1].length > this.maxSegmentLimit) {
-        dimensionValuesMapEntry[1].splice(this.maxSegmentLimit);
+    for (let i = 0; i < dimensionValuesMapEntryList.length; i++) {
+      const dimensionValuesMapEntry = dimensionValuesMapEntryList[i];
+      const maxSegmentLimit = this.maxSegmentLimit[i] || this.maxSegmentLimit;
+      if (dimensionValuesMapEntry[1].length > maxSegmentLimit) {
+        dimensionValuesMapEntry[1].splice(maxSegmentLimit);
         dimensionValuesMapEntry[1].push(this.mergedSegmentName);
       }
     }

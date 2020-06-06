@@ -19,7 +19,7 @@
 | `colorScheme`                  | --                                 |             | `string[]`                 | `[...d3.schemeAccent]` |
 | `data`                         | --                                 |             | `ParallelSetsDataRecord[]` | `[]`                   |
 | `dimensions`                   | --                                 |             | `string[]`                 | `undefined`            |
-| `maxSegmentLimit`              | `max-segment-limit`                |             | `number`                   | `10`                   |
+| `maxSegmentLimit`              | `max-segment-limit`                |             | `number \| number[]`       | `10`                   |
 | `maxSegmentMarginRatioAllowed` | `max-segment-margin-ratio-allowed` |             | `number`                   | `.1`                   |
 | `mergedSegmentMaxRatio`        | `merged-segment-max-ratio`         |             | `number`                   | `1`                    |
 | `mergedSegmentName`            | `merged-segment-name`              |             | `string`                   | `'*Other*'`            |

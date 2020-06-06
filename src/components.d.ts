@@ -42,7 +42,7 @@ export namespace Components {
         "colorScheme": string[];
         "data": ParallelSetsDataRecord[];
         "dimensions": string[];
-        "maxSegmentLimit": number;
+        "maxSegmentLimit": number | number[];
         "maxSegmentMarginRatioAllowed": number;
         "mergedSegmentMaxRatio": number;
         "mergedSegmentName": string;
@@ -113,7 +113,7 @@ declare namespace LocalJSX {
         "colorScheme"?: string[];
         "data"?: ParallelSetsDataRecord[];
         "dimensions"?: string[];
-        "maxSegmentLimit"?: number;
+        "maxSegmentLimit"?: number | number[];
         "maxSegmentMarginRatioAllowed"?: number;
         "mergedSegmentMaxRatio"?: number;
         "mergedSegmentName"?: string;
