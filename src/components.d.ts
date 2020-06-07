@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { NodeSymbolType } from "./components/s-line-chart/s-line-chart";
 import { ParallelSetsDataNode, ParallelSetsDataRecord } from "./components/s-parallel-sets/utils";
 export namespace Components {
     interface SBar {
@@ -30,6 +31,18 @@ export namespace Components {
         "scaleMaxValue": number;
         "scaleMinValue": number;
         "values": number[] | string;
+    }
+    interface SLineChart {
+        "data": [number, number][][];
+        "lineColorScheme": string[];
+        "lineStrokeWidth": number;
+        "maxX": number;
+        "maxY": number;
+        "minX": number;
+        "minY": number;
+        "nodeColorScheme": string[];
+        "nodeSize": number;
+        "nodeSymbol": NodeSymbolType | NodeSymbolType[];
     }
     interface SParallelSets {
         "axisBoxFill": string;
@@ -65,6 +78,12 @@ declare global {
         prototype: HTMLSBoxElement;
         new (): HTMLSBoxElement;
     };
+    interface HTMLSLineChartElement extends Components.SLineChart, HTMLStencilElement {
+    }
+    var HTMLSLineChartElement: {
+        prototype: HTMLSLineChartElement;
+        new (): HTMLSLineChartElement;
+    };
     interface HTMLSParallelSetsElement extends Components.SParallelSets, HTMLStencilElement {
     }
     var HTMLSParallelSetsElement: {
@@ -74,6 +93,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "s-bar": HTMLSBarElement;
         "s-box": HTMLSBoxElement;
+        "s-line-chart": HTMLSLineChartElement;
         "s-parallel-sets": HTMLSParallelSetsElement;
     }
 }
@@ -102,6 +122,18 @@ declare namespace LocalJSX {
         "scaleMinValue"?: number;
         "values"?: number[] | string;
     }
+    interface SLineChart {
+        "data"?: [number, number][][];
+        "lineColorScheme"?: string[];
+        "lineStrokeWidth"?: number;
+        "maxX"?: number;
+        "maxY"?: number;
+        "minX"?: number;
+        "minY"?: number;
+        "nodeColorScheme"?: string[];
+        "nodeSize"?: number;
+        "nodeSymbol"?: NodeSymbolType | NodeSymbolType[];
+    }
     interface SParallelSets {
         "axisBoxFill"?: string;
         "axisBoxWidth"?: number;
@@ -127,6 +159,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "s-bar": SBar;
         "s-box": SBox;
+        "s-line-chart": SLineChart;
         "s-parallel-sets": SParallelSets;
     }
 }
@@ -136,6 +169,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "s-bar": LocalJSX.SBar & JSXBase.HTMLAttributes<HTMLSBarElement>;
             "s-box": LocalJSX.SBox & JSXBase.HTMLAttributes<HTMLSBoxElement>;
+            "s-line-chart": LocalJSX.SLineChart & JSXBase.HTMLAttributes<HTMLSLineChartElement>;
             "s-parallel-sets": LocalJSX.SParallelSets & JSXBase.HTMLAttributes<HTMLSParallelSetsElement>;
         }
     }

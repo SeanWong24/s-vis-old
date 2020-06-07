@@ -64,6 +64,26 @@
   </div>
   <hr />
   <div>
+    <h1>Line Charts</h1>
+    <s-line-chart style="width: 600px; height: 300px;" min-x="0" min-y="0"></s-line-chart>
+    <script>
+      const lineChartElement = document.querySelector('s-line-chart');
+      lineChartElement.data = [
+        [
+          [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]
+        ],
+        [
+          [1, 5], [2, 4], [3, 3], [4, 2], [5, 1]
+        ],
+        [
+          [1, 1], [2, 3], [3, 5], [4, 3], [5, 1]
+        ],
+      ];
+      lineChartElement.nodeSymbol = ['circle', 'wye', 'star'];
+    </script>
+  </div>
+  <hr />
+  <div>
     <h1>Parallel Sets</h1>
     <s-parallel-sets max-segment-limit="2" merged-segment-max-ratio=".1" max-segment-margin-ratio-allowed=".15"
       minimum-ratio-to-show-axis-text=".1" style="width: 600px; height: 300px;"></s-parallel-sets>
