@@ -37,7 +37,12 @@ export class SLineChart {
   }
 
   render() {
-    const margin = 10;
+    const margin = {
+      left: 50,
+      top: 10,
+      right: 10,
+      bottom: 20
+    }
     const { width, height } = this.hostElementBoundingClientRect || {};
     const flatData = this.data.flat();
     const flatXValueList = flatData.map(coordinate => coordinate[0]);
@@ -46,14 +51,32 @@ export class SLineChart {
     const maxX = this.maxX !== undefined ? this.maxX : d3.max(flatXValueList);
     const minY = this.minY !== undefined ? this.minY : d3.min(flatYValueList);
     const maxY = this.maxY !== undefined ? this.maxY : d3.max(flatYValueList);
-    const scaleX = d3.scaleLinear().domain([minX, maxX]).range([margin, width - margin]);
-    const scaleY = d3.scaleLinear().domain([minY, maxY]).range([height - margin, margin]);
+    const scaleX = d3.scaleLinear().domain([minX, maxX]).range([margin.left, width - margin.right]);
+    const scaleY = d3.scaleLinear().domain([minY, maxY]).range([height - margin.bottom, margin.top]);
+
+    const yAxis = d3.axisLeft(scaleY);
+    const xAxis = d3.axisBottom(scaleX);
 
     return (
       <Host>
         {
           width && height &&
-          <svg width={width} height={height}>
+          <svg
+            width={width}
+            height={height}
+          >
+            <g
+              id="y-axis"
+              ref={el => d3.select(el).call(yAxis)}
+              height={height - margin.top - margin.bottom}
+              transform={`translate(${margin.left}, 0)`}
+            ></g>
+            <g
+              id="x-axis"
+              ref={el => d3.select(el).call(xAxis)}
+              width={width - margin.left - margin.right}
+              transform={`translate(0, ${height - margin.bottom})`}
+            ></g>
             {
               this.data.map((group, i) => {
                 let d = '';
@@ -65,6 +88,7 @@ export class SLineChart {
                   const scaledX = scaleX(x);
                   const scaledY = scaleY(y);
                   const node = <path
+                    class="node"
                     transform={`translate(${scaledX},${scaledY}) scale(${this.nodeSize})`}
                     d={symbol}
                     fill={this.nodeColorScheme[i]}
@@ -79,8 +103,9 @@ export class SLineChart {
                   }
                 }
                 return (
-                  <g>
+                  <g class="line-container">
                     <path
+                      class="line"
                       d={d}
                       stroke={this.lineColorScheme[i]}
                       stroke-width={this.lineStrokeWidth}
