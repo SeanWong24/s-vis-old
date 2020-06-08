@@ -62,6 +62,7 @@ export namespace Components {
         "minimumRatioToShowAxisText": number;
         "ribbonHighlightOpacity": number;
         "ribbonOpacity": number;
+        "ribbonTension": number;
         "sideMargin": number;
     }
 }
@@ -154,6 +155,7 @@ declare namespace LocalJSX {
         "onRibbonClick"?: (event: CustomEvent<ParallelSetsDataNode>) => void;
         "ribbonHighlightOpacity"?: number;
         "ribbonOpacity"?: number;
+        "ribbonTension"?: number;
         "sideMargin"?: number;
     }
     interface IntrinsicElements {

@@ -26,6 +26,7 @@
 | `minimumRatioToShowAxisText`   | `minimum-ratio-to-show-axis-text`  |             | `number`                   | `0`                    |
 | `ribbonHighlightOpacity`       | `ribbon-highlight-opacity`         |             | `number`                   | `.8`                   |
 | `ribbonOpacity`                | `ribbon-opacity`                   |             | `number`                   | `.5`                   |
+| `ribbonTension`                | `ribbon-tension`                   |             | `number`                   | `1`                    |
 | `sideMargin`                   | `side-margin`                      |             | `number`                   | `2`                    |
 
 

@@ -35,6 +35,7 @@ export class SParallelSets implements ComponentInterface {
   @Prop() ribbonOpacity: number = .5;
   @Prop() ribbonHighlightOpacity: number = .8;
   @Prop() sideMargin: number = 2;
+  @Prop() ribbonTension: number = 1;
 
   @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
   @Event() axisSegmentClick: EventEmitter<ParallelSetsDataNode[]>;
@@ -241,9 +242,14 @@ export class SParallelSets implements ComponentInterface {
           const childCountRatio = (childNode.segmentPosition[1] - childNode.segmentPosition[0]) *
             (node.valueHistory[i] === this.mergedSegmentName ? (1 - node.mergedSegmentAdjustmentRatio) : 1) /
             node.adjustmentRatio;
+          const y1 = (node.adjustedSegmentPosition[0] + totalPreviousCountRatio) * height;
+          const y2 = (node.adjustedSegmentPosition[0] + (totalPreviousCountRatio += childCountRatio)) * height;
+          const childY1 = (childNode.adjustedSegmentPosition[0] || childNode.segmentPosition[0]) * height;
+          const childY2 = (childNode.adjustedSegmentPosition[1] || childNode.segmentPosition[1]) * height;
+          const pathD = this.obtainRibbonPathD(x, y1, y2, childX, childY1, childY2);
           const path = <path
             ref={el => d3.select(el).datum(childNode)}
-            d={`M${x},${(node.adjustedSegmentPosition[0] + totalPreviousCountRatio) * height} V${(node.adjustedSegmentPosition[0] + (totalPreviousCountRatio += childCountRatio)) * height} L${childX},${(childNode.adjustedSegmentPosition[1] || childNode.segmentPosition[1]) * height} V${(childNode.adjustedSegmentPosition[0] || childNode.segmentPosition[0]) * height} Z`}
+            d={pathD}
             fill={colorScale(node.valueHistory[0].toString())}
             opacity={this.ribbonOpacity}
             onMouseEnter={() => {
@@ -277,6 +283,20 @@ export class SParallelSets implements ComponentInterface {
       });
       return <g class="ribbons">{ribbonList.flat()}</g>;
     });
+  }
+
+  private obtainRibbonPathD(x: number, y1: number, y2: number, childX: number, childY1: number, childY2: number) {
+    const controlPointX1 = this.ribbonTension * x + (1 - this.ribbonTension) * childX;
+    const controlPointX2 = this.ribbonTension * childX + (1 - this.ribbonTension) * x;
+    const pathGenerator = d3.path();
+    pathGenerator.moveTo(x, y1);
+    pathGenerator.lineTo(x, y2);
+    pathGenerator.bezierCurveTo(controlPointX1, y2, controlPointX2, childY2, childX, childY2);
+    pathGenerator.lineTo(childX, childY1);
+    pathGenerator.bezierCurveTo(controlPointX2, childY1, controlPointX1, y1, x, y1);
+    pathGenerator.closePath();
+    const pathD = pathGenerator.toString();
+    return pathD;
   }
 
   private fillSegmentPositions(

@@ -85,8 +85,8 @@
   <hr />
   <div>
     <h1>Parallel Sets</h1>
-    <s-parallel-sets max-segment-limit="8" merged-segment-max-ratio=".1" max-segment-margin-ratio-allowed=".15"
-      minimum-ratio-to-show-axis-text=".05" side-margin="5" style="width: 600px; height: 300px;"></s-parallel-sets>
+    <s-parallel-sets merged-segment-max-ratio=".1" max-segment-margin-ratio-allowed=".15"
+      minimum-ratio-to-show-axis-text=".05" side-margin="5" ribbon-tension=".6" style="width: 600px; height: 300px;"></s-parallel-sets>
     <script>
       const parsetsElement = document.querySelector('s-parallel-sets');
       d3.json('./assets/parallel_sets/parset_data.json')
@@ -99,9 +99,7 @@
         "Class"
       ];
       parsetsElement.colorScheme = ["red", "blue", "green"];
-      setTimeout(() => {
-        parsetsElement.maxSegmentLimit = [2, 2, 3, 5, 6];
-      }, 5000);
+      parsetsElement.maxSegmentLimit = [2, 2, 3, 6, 8];
       parsetsElement.addEventListener('ribbonClick', ({ detail }) => console.log(detail));
       parsetsElement.addEventListener('axisSegmentClick', ({ detail }) => console.log(detail));
     </script>
