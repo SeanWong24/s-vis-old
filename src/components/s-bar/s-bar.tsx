@@ -58,7 +58,7 @@ export class SBar implements ComponentInterface {
                     id="first-segment"
                     x="0"
                     y="0"
-                    width={firstLevelScale(this.value)}
+                    width={this.adjustedScale(this.value, firstLevelScale, this.minValue, this.maxValue, 0, 100)}
                     height="100"
                     fill={this.fill}></rect>
                 }
@@ -68,7 +68,7 @@ export class SBar implements ComponentInterface {
                     id="second-segment"
                     x="0"
                     y="15"
-                    width={secondLevelScale(this.value)}
+                    width={this.adjustedScale(this.value, secondLevelScale, this.maxValue, this.secondLevelMaxValue, 0, 100)}
                     height="70"
                     fill={this.secondLevelFill}></rect>
                 }
@@ -78,7 +78,7 @@ export class SBar implements ComponentInterface {
                     id="third-segment"
                     x="0"
                     y="30"
-                    width={thirdLevelScale(this.value)}
+                    width={this.adjustedScale(this.value, thirdLevelScale, this.secondLevelMaxValue, this.thirdLevelMaxValue, 0, 100)}
                     height="40"
                     fill={this.thirdLevelFill}></rect>
                 }
@@ -151,6 +151,23 @@ export class SBar implements ComponentInterface {
         </svg>
       </Host>
     );
+  }
+
+  private adjustedScale(
+    value: number,
+    scaleFunction: (value: number) => number,
+    minDomain: number,
+    maxDomain: number,
+    minRange: number,
+    maxRange: number
+  ) {
+    if (this.value <= minDomain) {
+      return minRange;
+    } else if (this.value >= maxDomain) {
+      return maxRange;
+    } else {
+      return scaleFunction(value);
+    }
   }
 
 }
