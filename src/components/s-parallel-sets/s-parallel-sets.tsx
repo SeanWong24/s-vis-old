@@ -64,6 +64,7 @@ export class SParallelSets implements ComponentInterface {
       dimensionValuesMap,
       dimensionNodeListMap
     );
+    this.removeEmptyDataRecordsForDimensionNodeListMap(dimensionNodeListMap);
     this.fillSegmentPositions(dimensionNodeListMap, dimensionValuesMap);
 
     const { width, height } = this.hostElementBoundingClientRect || {};
@@ -394,6 +395,12 @@ export class SParallelSets implements ComponentInterface {
       }
     }
     return { mergedSegmentAdjustmentOffset, mergedSegmentAdjustmentOffsetRatio };
+  }
+
+  private removeEmptyDataRecordsForDimensionNodeListMap(dimensionNodeListMap: Map<string, ParallelSetsDataNode[]>) {
+    for (const [dimensionName, nodeList] of dimensionNodeListMap) {
+      dimensionNodeListMap.set(dimensionName, nodeList.filter(node => node.dataRecordList.length > 0));
+    }
   }
 
   private fillDataRecordListForDimensionNodeListMap(
