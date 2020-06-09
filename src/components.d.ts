@@ -153,6 +153,7 @@ declare namespace LocalJSX {
         "minimumRatioToShowAxisText"?: number;
         "onAxisSegmentClick"?: (event: CustomEvent<ParallelSetsDataNode[]>) => void;
         "onRibbonClick"?: (event: CustomEvent<ParallelSetsDataNode>) => void;
+        "onVisLoaded"?: (event: CustomEvent<Map<string, ParallelSetsDataNode[]>>) => void;
         "ribbonHighlightOpacity"?: number;
         "ribbonOpacity"?: number;
         "ribbonTension"?: number;

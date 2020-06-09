@@ -39,6 +39,7 @@ export class SParallelSets implements ComponentInterface {
 
   @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
   @Event() axisSegmentClick: EventEmitter<ParallelSetsDataNode[]>;
+  @Event() visLoaded: EventEmitter<Map<string, ParallelSetsDataNode[]>>;
 
   connectedCallback() {
     const resizeObserver = new ResizeObserver(entryList => {
@@ -72,7 +73,10 @@ export class SParallelSets implements ComponentInterface {
       <Host>
         {
           width && height &&
-          <div id="main-container">
+          <div
+            id="main-container"
+            ref={() => this.visLoaded.emit(dimensionNodeListMap)}
+          >
             {this.contextMenu}
             <div id="axis-headers-container" style={{ height: this.axisHeaderTextSize + 'px' }}>
               {this.dimensionNameList.map((dimensionName, i) => (

@@ -32,10 +32,11 @@
 
 ## Events
 
-| Event              | Description | Type                                  |
-| ------------------ | ----------- | ------------------------------------- |
-| `axisSegmentClick` |             | `CustomEvent<ParallelSetsDataNode[]>` |
-| `ribbonClick`      |             | `CustomEvent<ParallelSetsDataNode>`   |
+| Event              | Description | Type                                               |
+| ------------------ | ----------- | -------------------------------------------------- |
+| `axisSegmentClick` |             | `CustomEvent<ParallelSetsDataNode[]>`              |
+| `ribbonClick`      |             | `CustomEvent<ParallelSetsDataNode>`                |
+| `visLoaded`        |             | `CustomEvent<Map<string, ParallelSetsDataNode[]>>` |
 
 
 ----------------------------------------------
