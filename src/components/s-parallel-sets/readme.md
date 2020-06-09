@@ -32,11 +32,13 @@
 
 ## Events
 
-| Event              | Description | Type                                               |
-| ------------------ | ----------- | -------------------------------------------------- |
-| `axisSegmentClick` |             | `CustomEvent<ParallelSetsDataNode[]>`              |
-| `ribbonClick`      |             | `CustomEvent<ParallelSetsDataNode>`                |
-| `visLoaded`        |             | `CustomEvent<Map<string, ParallelSetsDataNode[]>>` |
+| Event                   | Description | Type                                               |
+| ----------------------- | ----------- | -------------------------------------------------- |
+| `axisHeaderClick`       |             | `CustomEvent<string>`                              |
+| `axisHeaderContextMenu` |             | `CustomEvent<string>`                              |
+| `axisSegmentClick`      |             | `CustomEvent<ParallelSetsDataNode[]>`              |
+| `ribbonClick`           |             | `CustomEvent<ParallelSetsDataNode>`                |
+| `visLoaded`             |             | `CustomEvent<Map<string, ParallelSetsDataNode[]>>` |
 
 
 ----------------------------------------------

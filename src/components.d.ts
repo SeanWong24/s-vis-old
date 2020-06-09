@@ -151,6 +151,8 @@ declare namespace LocalJSX {
         "mergedSegmentMaxRatio"?: number;
         "mergedSegmentName"?: string;
         "minimumRatioToShowAxisText"?: number;
+        "onAxisHeaderClick"?: (event: CustomEvent<string>) => void;
+        "onAxisHeaderContextMenu"?: (event: CustomEvent<string>) => void;
         "onAxisSegmentClick"?: (event: CustomEvent<ParallelSetsDataNode[]>) => void;
         "onRibbonClick"?: (event: CustomEvent<ParallelSetsDataNode>) => void;
         "onVisLoaded"?: (event: CustomEvent<Map<string, ParallelSetsDataNode[]>>) => void;

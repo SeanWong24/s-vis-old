@@ -38,6 +38,8 @@ export class SParallelSets implements ComponentInterface {
   @Prop() ribbonTension: number = 1;
 
   @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
+  @Event() axisHeaderClick: EventEmitter<string>;
+  @Event() axisHeaderContextMenu: EventEmitter<string>;
   @Event() axisSegmentClick: EventEmitter<ParallelSetsDataNode[]>;
   @Event() visLoaded: EventEmitter<Map<string, ParallelSetsDataNode[]>>;
 
@@ -90,6 +92,8 @@ export class SParallelSets implements ComponentInterface {
                     fontWeight: this.axisHeaderTextWeight,
                     left: this.obtainDimensionPosition(width, this.sideMargin, i) + 'px'
                   }}
+                  onClick={() => this.axisHeaderClick.emit(dimensionName)}
+                  onContextMenu={() => this.axisHeaderContextMenu.emit(dimensionName)}
                 >{dimensionName}</text>
               ))}
             </div>
