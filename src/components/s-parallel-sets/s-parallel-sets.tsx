@@ -15,10 +15,10 @@ export class SParallelSets implements ComponentInterface {
 
   @State() hostElementBoundingClientRect: DOMRect;
   @State() contextMenu: any;
-  @State() dimensionValuesMap: Map<string, (string | number)[]>;
-
+  
   @Prop() data: ParallelSetsDataRecord[] = [];
   @Prop() dimensions: string[];
+  @Prop({ mutable: true }) dimensionValuesMap: Map<string, (string | number)[]>;
   @Prop() maxSegmentLimit: number | number[] = 10;
   @Prop() mergedSegmentName: string = '*Other*';
   @Prop() mergedSegmentMaxRatio: number = 1;
@@ -93,7 +93,10 @@ export class SParallelSets implements ComponentInterface {
                     left: this.obtainDimensionPosition(width, this.sideMargin, i) + 'px'
                   }}
                   onClick={() => this.axisHeaderClick.emit(dimensionName)}
-                  onContextMenu={() => this.axisHeaderContextMenu.emit(dimensionName)}
+                  onContextMenu={event => {
+                    event.preventDefault();
+                    this.axisHeaderContextMenu.emit(dimensionName);
+                  }}
                 >{dimensionName}</text>
               ))}
             </div>

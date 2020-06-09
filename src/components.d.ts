@@ -54,6 +54,7 @@ export namespace Components {
         "axisStrokeWidth": number;
         "colorScheme": string[];
         "data": ParallelSetsDataRecord[];
+        "dimensionValuesMap": Map<string, (string | number)[]>;
         "dimensions": string[];
         "maxSegmentLimit": number | number[];
         "maxSegmentMarginRatioAllowed": number;
@@ -145,6 +146,7 @@ declare namespace LocalJSX {
         "axisStrokeWidth"?: number;
         "colorScheme"?: string[];
         "data"?: ParallelSetsDataRecord[];
+        "dimensionValuesMap"?: Map<string, (string | number)[]>;
         "dimensions"?: string[];
         "maxSegmentLimit"?: number | number[];
         "maxSegmentMarginRatioAllowed"?: number;
