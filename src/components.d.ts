@@ -65,6 +65,7 @@ export namespace Components {
         "ribbonOpacity": number;
         "ribbonTension": number;
         "sideMargin": number;
+        "useTextures": boolean;
     }
 }
 declare global {
@@ -162,6 +163,7 @@ declare namespace LocalJSX {
         "ribbonOpacity"?: number;
         "ribbonTension"?: number;
         "sideMargin"?: number;
+        "useTextures"?: boolean;
     }
     interface IntrinsicElements {
         "s-bar": SBar;

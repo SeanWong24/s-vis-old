@@ -1,6 +1,7 @@
 import { Component, ComponentInterface, Host, h, Prop, Element, State, Event, EventEmitter } from '@stencil/core';
 import { ParallelSetsDataRecord, compareStrings, ParallelSetsDataNode } from './utils';
 import * as d3 from 'd3';
+import textures from 'textures';
 
 @Component({
   tag: 's-parallel-sets',
@@ -10,12 +11,13 @@ import * as d3 from 'd3';
 export class SParallelSets implements ComponentInterface {
 
   private dimensionNameList: string[];
+  private textureContainerElement: SVGElement;
 
   @Element() hostElement: HTMLElement;
 
   @State() hostElementBoundingClientRect: DOMRect;
   @State() contextMenu: any;
-  
+
   @Prop() data: ParallelSetsDataRecord[] = [];
   @Prop() dimensions: string[];
   @Prop({ mutable: true }) dimensionValuesMap: Map<string, (string | number)[]>;
@@ -36,6 +38,7 @@ export class SParallelSets implements ComponentInterface {
   @Prop() ribbonHighlightOpacity: number = .8;
   @Prop() sideMargin: number = 2;
   @Prop() ribbonTension: number = 1;
+  @Prop() useTextures: boolean = false;
 
   @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
   @Event() axisHeaderClick: EventEmitter<string>;
@@ -71,11 +74,20 @@ export class SParallelSets implements ComponentInterface {
 
     const { width, height } = this.hostElementBoundingClientRect || {};
     const colorScale = d3.scaleOrdinal(this.colorScheme);
+    const textureScale = d3.scaleOrdinal([
+      'hexagons',
+      'crosses',
+      'caps',
+      'woven',
+      'waves',
+      'nylon',
+      'squares'
+    ]);
 
     return (
       <Host>
         {
-          width && height &&
+          width && height && this.textureContainerElement &&
           <div
             id="main-container"
             ref={() => this.visLoaded.emit(dimensionNodeListMap)}
@@ -106,7 +118,8 @@ export class SParallelSets implements ComponentInterface {
                   dimensionNodeListMap,
                   width,
                   height - this.axisHeaderTextSize,
-                  colorScale
+                  colorScale,
+                  textureScale
                 )
               }
               {
@@ -120,6 +133,11 @@ export class SParallelSets implements ComponentInterface {
             </svg>
           </div>
         }
+        <svg
+          id="texture-container"
+          ref={el => this.textureContainerElement = el}
+          height={0}
+        ></svg>
       </Host>
     );
   }
@@ -237,7 +255,8 @@ export class SParallelSets implements ComponentInterface {
     dimensionNodeListMap: Map<string, ParallelSetsDataNode[]>,
     width: number,
     height: number,
-    colorScale: d3.ScaleOrdinal<string, string>
+    colorScale: d3.ScaleOrdinal<string, string>,
+    textureScale: d3.ScaleOrdinal<string, any>
   ) {
     this.hostElement.style.setProperty('--ribbon-highlight-opacity', this.ribbonHighlightOpacity.toString());
     return this.dimensionNameList.map((dimensionName, i) => {
@@ -259,10 +278,16 @@ export class SParallelSets implements ComponentInterface {
           const childY1 = (childNode.adjustedSegmentPosition[0] || childNode.segmentPosition[0]) * height;
           const childY2 = (childNode.adjustedSegmentPosition[1] || childNode.segmentPosition[1]) * height;
           const pathD = this.obtainRibbonPathD(x, y1, y2, childX, childY1, childY2);
+          const backgroundColor = colorScale(node.valueHistory[0].toString());
+          let texture;
+          if (this.useTextures && node.valueHistory[1] !== undefined) {
+            texture = this.createTexture(textureScale(node.valueHistory[1].toString())).background(backgroundColor);
+            d3.select(this.textureContainerElement).call(texture);
+          }
           const path = <path
             ref={el => d3.select(el).datum(childNode)}
             d={pathD}
-            fill={colorScale(node.valueHistory[0].toString())}
+            fill={texture ? texture.url() : backgroundColor}
             opacity={this.ribbonOpacity}
             onMouseEnter={() => {
               d3.select(this.hostElement.shadowRoot)
@@ -490,6 +515,11 @@ export class SParallelSets implements ComponentInterface {
 
   private obtainDimensionPosition(width: number, margin: number, index: number) {
     return (width - margin * 2 - this.axisBoxWidth) / (this.dimensionNameList.length - 1) * index + margin;
+  }
+
+  private createTexture(textureName: string) {
+    return textures.paths()
+      .d(textureName);
   }
 
 }
