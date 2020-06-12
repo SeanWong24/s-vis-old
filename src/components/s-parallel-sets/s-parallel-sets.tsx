@@ -12,6 +12,7 @@ export class SParallelSets implements ComponentInterface {
 
   private dimensionNameList: string[];
   private textureContainerElement: SVGElement;
+  private textureMap: Map<string, any> = new Map();
 
   @Element() hostElement: HTMLElement;
 
@@ -281,7 +282,14 @@ export class SParallelSets implements ComponentInterface {
           const backgroundColor = colorScale(node.valueHistory[0].toString());
           let texture;
           if (this.useTextures && node.valueHistory[1] !== undefined) {
-            texture = this.createTexture(textureScale(node.valueHistory[1].toString())).background(backgroundColor);
+            if (!this.textureMap.has(node.valueHistory[1] + '\t' + backgroundColor)) {
+              this.textureMap.set(
+                node.valueHistory[1] + '\t' + backgroundColor,
+                this.createTexture(textureScale(node.valueHistory[1].toString())).background(backgroundColor)
+              );
+
+            }
+            texture = this.textureMap.get(node.valueHistory[1] + '\t' + backgroundColor);
             d3.select(this.textureContainerElement).call(texture);
           }
           const path = <path
