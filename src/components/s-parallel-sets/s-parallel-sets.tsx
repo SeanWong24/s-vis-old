@@ -474,24 +474,31 @@ export class SParallelSets implements ComponentInterface {
     for (let i = 0; i < this.dimensionNameList.length; i++) {
       const currentDimensionName = this.dimensionNameList[i];
       const previousDimensionName = (i > 0) ? this.dimensionNameList[i - 1] : '';
-      const valueHistoryList: ParallelSetsDataNode[] = [];
+      const currentDimensionNodeList: ParallelSetsDataNode[] = [];
       const currentDimensionValueList = dimensionValuesMap.get(currentDimensionName);
-      const previousDimensionValueHistoryList = dimensionNodeListMap.get(previousDimensionName);
-      for (const currentDimensionValue of currentDimensionValueList) {
-        if (previousDimensionValueHistoryList) {
-          for (const previousDimensionValueHistory of previousDimensionValueHistoryList) {
-            valueHistoryList.push(Object.assign(new ParallelSetsDataNode, {
-              valueHistory: [...previousDimensionValueHistory.valueHistory, currentDimensionValue]
-            }));
+      const previousDimensionValueList = dimensionValuesMap.get(previousDimensionName);
+      const previousDimensionNodeList = dimensionNodeListMap.get(previousDimensionName);
+
+      let columnIndex = 0;
+      const previousDimensionValueCount = i > 0 ? previousDimensionValueList.length : 1;
+      const previousDimensionGroupCount = i > 0 ? previousDimensionNodeList.length / previousDimensionValueList.length : 1;
+      for (let currentDimensionValueIndex = 0; currentDimensionValueIndex < currentDimensionValueList.length; currentDimensionValueIndex++) {
+        for (let previousDimensionGroupIndex = 0; previousDimensionGroupIndex < previousDimensionGroupCount; previousDimensionGroupIndex++) {
+          for (let previousDimensionValueIndex = 0; previousDimensionValueIndex < previousDimensionValueCount; previousDimensionValueIndex++) {
+            debugger
+            currentDimensionNodeList[columnIndex] = Object.assign(new ParallelSetsDataNode, {
+              valueHistory: i > 0 ?
+                [
+                  ...previousDimensionNodeList[previousDimensionGroupIndex + previousDimensionValueIndex * previousDimensionGroupCount].valueHistory,
+                  currentDimensionValueList[currentDimensionValueIndex]
+                ] :
+                [currentDimensionValueList[currentDimensionValueIndex]]
+            });
+            columnIndex++;
           }
         }
-        else {
-          valueHistoryList.push(Object.assign(new ParallelSetsDataNode, {
-            valueHistory: [currentDimensionValue]
-          }));
-        }
       }
-      dimensionNodeListMap.set(currentDimensionName, valueHistoryList);
+      dimensionNodeListMap.set(currentDimensionName, currentDimensionNodeList);
     }
     return dimensionNodeListMap;
   }
