@@ -485,7 +485,6 @@ export class SParallelSets implements ComponentInterface {
       for (let currentDimensionValueIndex = 0; currentDimensionValueIndex < currentDimensionValueList.length; currentDimensionValueIndex++) {
         for (let previousDimensionGroupIndex = 0; previousDimensionGroupIndex < previousDimensionGroupCount; previousDimensionGroupIndex++) {
           for (let previousDimensionValueIndex = 0; previousDimensionValueIndex < previousDimensionValueCount; previousDimensionValueIndex++) {
-            debugger
             currentDimensionNodeList[columnIndex] = Object.assign(new ParallelSetsDataNode, {
               valueHistory: i > 0 ?
                 [
