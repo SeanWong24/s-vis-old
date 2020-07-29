@@ -517,7 +517,7 @@ export class SParallelSets implements ComponentInterface {
     });
     for (let i = 0; i < dimensionValuesMapEntryList.length; i++) {
       const dimensionValuesMapEntry = dimensionValuesMapEntryList[i];
-      const maxSegmentLimit = this.maxSegmentLimit[i] || this.maxSegmentLimit;
+      const maxSegmentLimit = this.maxSegmentLimit?.[i] || this.maxSegmentLimit;
       if (dimensionValuesMapEntry[1].length > maxSegmentLimit) {
         dimensionValuesMapEntry[1].splice(maxSegmentLimit);
         dimensionValuesMapEntry[1].push(this.mergedSegmentName);
