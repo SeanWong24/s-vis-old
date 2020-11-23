@@ -65,6 +65,7 @@ export namespace Components {
         "ribbonOpacity": number;
         "ribbonTension": number;
         "sideMargin": number;
+        "textureDefinitions": string[];
         "useTextures": boolean;
     }
 }
@@ -163,6 +164,7 @@ declare namespace LocalJSX {
         "ribbonOpacity"?: number;
         "ribbonTension"?: number;
         "sideMargin"?: number;
+        "textureDefinitions"?: string[];
         "useTextures"?: boolean;
     }
     interface IntrinsicElements {

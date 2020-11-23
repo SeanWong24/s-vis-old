@@ -14,6 +14,8 @@ export class SParallelSets implements ComponentInterface {
   private textureContainerElement: SVGElement;
   private textureMap: Map<string, any> = new Map();
 
+  textures = textures;
+
   @Element() hostElement: HTMLElement;
 
   @State() hostElementBoundingClientRect: DOMRect;
@@ -40,6 +42,7 @@ export class SParallelSets implements ComponentInterface {
   @Prop() sideMargin: number = 2;
   @Prop() ribbonTension: number = 1;
   @Prop() useTextures: boolean = false;
+  @Prop() textureDefinitions: string[];
 
   @Event() ribbonClick: EventEmitter<ParallelSetsDataNode>;
   @Event() axisHeaderClick: EventEmitter<string>;
@@ -75,14 +78,20 @@ export class SParallelSets implements ComponentInterface {
 
     const { width, height } = this.hostElementBoundingClientRect || {};
     const colorScale = d3.scaleOrdinal(this.colorScheme);
-    const textureScale = d3.scaleOrdinal([
-      'hexagons',
-      'crosses',
-      'caps',
-      'woven',
-      'waves',
-      'nylon',
-      'squares'
+    const textureScale = d3.scaleOrdinal(this.textureDefinitions || [
+      'this.textures.lines()',
+      'this.textures.lines().heavier()',
+      'this.textures.lines().lighter()',
+      'this.textures.lines().thicker()',
+      'this.textures.lines().thinner()',
+      'this.textures.lines().orientation("vertical").strokeWidth(1).shapeRendering("crispEdges")',
+      'this.textures.circles()',
+      'this.textures.circles().heavier()',
+      'this.textures.circles().lighter()',
+      'this.textures.circles().thicker()',
+      'this.textures.circles().thinner()',
+      'this.textures.circles().complement()',
+      'this.textures.circles().radius(4).fill("transparent").strokeWidth(2)'
     ]);
 
     return (
@@ -531,9 +540,8 @@ export class SParallelSets implements ComponentInterface {
     return (width - margin * 2 - this.axisBoxWidth) / (this.dimensionNameList.length - 1) * index + margin;
   }
 
-  private createTexture(textureName: string) {
-    return textures.paths()
-      .d(textureName);
+  private createTexture(textureDefinition: string) {
+    return eval(textureDefinition);
   }
 
 }

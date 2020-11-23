@@ -29,6 +29,7 @@
 | `ribbonOpacity`                | `ribbon-opacity`                   |             | `number`                            | `.5`                   |
 | `ribbonTension`                | `ribbon-tension`                   |             | `number`                            | `1`                    |
 | `sideMargin`                   | `side-margin`                      |             | `number`                            | `2`                    |
+| `textureDefinitions`           | --                                 |             | `string[]`                          | `undefined`            |
 | `useTextures`                  | `use-textures`                     |             | `boolean`                           | `false`                |
 
 
