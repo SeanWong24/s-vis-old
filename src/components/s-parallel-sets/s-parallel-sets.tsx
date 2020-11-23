@@ -291,13 +291,10 @@ export class SParallelSets implements ComponentInterface {
           const backgroundColor = colorScale(node.valueHistory[0].toString());
           let texture;
           if (this.useTextures && node.valueHistory[1] !== undefined) {
-            if (!this.textureMap.has(node.valueHistory[1] + '\t' + backgroundColor)) {
-              this.textureMap.set(
-                node.valueHistory[1] + '\t' + backgroundColor,
-                this.createTexture(textureScale(node.valueHistory[1].toString())).background(backgroundColor)
-              );
-
-            }
+            this.textureMap.set(
+              node.valueHistory[1] + '\t' + backgroundColor,
+              this.createTexture(textureScale(node.valueHistory[1].toString())).background(backgroundColor)
+            );
             texture = this.textureMap.get(node.valueHistory[1] + '\t' + backgroundColor);
             d3.select(this.textureContainerElement).call(texture);
           }
